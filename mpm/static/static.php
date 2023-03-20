@@ -1,0 +1,16 @@
+<?php
+namespace Mpm\Static;
+
+
+function staticfile($staticfile){
+  $dirs = STATICFILES["DIRS"];
+    $dirs = array_merge($dirs,APPS);
+    //AUTOLOAD_STATICFILES["DIRS"],
+    $i = 0;
+    foreach($dirs as $dir){
+      $a =  glob($dir."/static/$staticfile");
+      if(count($a)>0) return (substr($a[0],0,1)=="/"?$a[0]:"/".$a[0]);
+      $i++;
+    }
+  return "";
+}
